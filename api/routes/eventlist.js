@@ -8,6 +8,7 @@ router.get('/:eventListId',(req,res,next) =>{
     const id = req.params.eventListId;
 
     ListModel.findById(id)
+    .populate('allData')
     .exec()
     .then(doc => {
         console.log(doc);
