@@ -28,7 +28,7 @@ app.use((req,res,next) => {
 
 
 // Connecting to the database
-mongoose.connect(dbConfig.url, {
+mongoose.connect('mongodb://Puneet1:puneet2@cluster0-shard-00-00-yzoyv.mongodb.net:27017,cluster0-shard-00-01-yzoyv.mongodb.net:27017,cluster0-shard-00-02-yzoyv.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true', {
     useNewUrlParser: true
 }).then(() => {
     console.log("Successfully connected to the database");    
