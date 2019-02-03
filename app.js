@@ -7,6 +7,7 @@ const dbConfig = require('./api/database/dburl');
 
 const eventRoutes = require('./api/routes/events');
 const eventList = require('./api/routes/eventlist');
+const homeRoutes=require('./api/routes/homeRoutes');
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended:false}));
@@ -28,7 +29,16 @@ app.use((req,res,next) => {
 
 
 // Connecting to the database
-mongoose.connect('mongodb://Puneet1:puneet2@cluster0-shard-00-00-yzoyv.mongodb.net:27017,cluster0-shard-00-01-yzoyv.mongodb.net:27017,cluster0-shard-00-02-yzoyv.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true', {
+// mongoose.connect('mongodb://Puneet1:puneet2@cluster0-shard-00-00-yzoyv.mongodb.net:27017,cluster0-shard-00-01-yzoyv.mongodb.net:27017,cluster0-shard-00-02-yzoyv.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true', {
+//     useNewUrlParser: true
+// }).then(() => {
+//     console.log("Successfully connected to the database");    
+// }).catch(err => {
+//     console.log('Could not connect to the database. Exiting now...', err);
+//     process.exit();
+// });
+
+mongoose.connect(dbConfig.url, {
     useNewUrlParser: true
 }).then(() => {
     console.log("Successfully connected to the database");    
@@ -40,6 +50,7 @@ mongoose.connect('mongodb://Puneet1:puneet2@cluster0-shard-00-00-yzoyv.mongodb.n
 // Routes for the requests
 app.use('/events',eventRoutes);
 app.use('/eventlist',eventList);
+app.use('/home',homeRoutes);
 
 // error in request
 app.use((req,res,next) => {
